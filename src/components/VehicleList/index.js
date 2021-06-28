@@ -1,7 +1,7 @@
 import React from 'react';
 import useData from './useData';
 import './style.scss';
-import VehicleCard from '../VehicleCard'
+import VehicleCard from '../VehicleCard';
 
 export default function VehicleList() {
   // eslint-disable-next-line no-unused-vars
@@ -15,8 +15,10 @@ export default function VehicleList() {
   }
 
   return (
-    <div className="VehicleList" data-testid="results">
-        {vehicles.map(vehicle =>  <VehicleCard  key={vehicle.id} vehicle={vehicle}/>)}
-    </div>
+
+      <div className="VehicleList" data-testid="results">
+          {vehicles.map((vehicle, index )=> vehicle.details ? <VehicleCard  key={vehicle.id} index={index} vehicle={vehicle}/> : '')}
+      </div>
+
   );
 }
