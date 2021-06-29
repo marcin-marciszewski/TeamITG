@@ -9,27 +9,25 @@ export default function useData() {
   useEffect(() => {
     const detailedVehicles = [];
     getData('http://localhost:8080/api/vehicles.json')
-    .then((vehicles) => Promise.all(vehicles.map(vehicle =>
-        fetch(vehicle.apiUrl)
+      .then((vehiclesList) => Promise.all(vehiclesList.map((vehicle) => fetch(vehicle.apiUrl)
         .then(
-          function(response) {
+          (response) => {
             if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
+              console.error(`Looks like there was a problem. Status Code: ${
+                response.status}`);
               return;
             }
-            return response.json()
+            return response.json();
           }
         )
-        .then(function(data) {
-          if(data && data.price && data.id === vehicle.id) {
+        .then((data) => {
+          if (data && data.price && data.id === vehicle.id) {
             vehicle.details = data;
           }
           detailedVehicles.push(vehicle);
           return detailedVehicles;
         })
-        .then(data => setVehicles(data))
-      )))
+        .then((data) => setVehicles(data)))))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, []);

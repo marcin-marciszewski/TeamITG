@@ -16,9 +16,9 @@ export default function VehicleList() {
 
   return (
 
-      <div className="VehicleList" data-testid="results">
-          {vehicles.map((vehicle, index )=> vehicle.details ? <VehicleCard  key={vehicle.id} index={index} vehicle={vehicle}/> : '')}
-      </div>
+    <div className="VehicleList" data-testid="results">
+      {vehicles.map((vehicle, index) => (vehicle.details ? <VehicleCard key={vehicle.id} index={index} vehicle={vehicle} /> : ''))}
+    </div>
 
   );
 }
